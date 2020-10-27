@@ -1,6 +1,6 @@
 Twooter (Twitter Clone)
 ============
-[![Current Version](https://img.shields.io/badge/version-1.0.0-green.svg)]
+![Current Version](https://img.shields.io/badge/version-1.0.0-green.svg)
 
 ## Table of contents
 * [General info](#general-info)
