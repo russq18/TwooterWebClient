@@ -6,23 +6,7 @@
             <div class="user-profile_follower-count">
                 <strong>Followers: </strong> {{followers}}
             </div>
-            <form class="user-profile_create-twoot" @submit.prevent="createNewTwoot">
-                <label>
-                    <strong>New Twoot</strong>
-                </label>
-                <textarea id="newTwoot" rows="4" v-model="newTwootContent"/>
-                <div class="user-profile_create-twoot-type">
-                    <label for="newTwootType"><strong>Type: </strong></label>
-                    <select id="newTwootType" v-model="selectedTwootType">
-                        <option :value="option.value" v-for="(option,index) in twootTypes" :key="index">
-                            {{option.name}}
-                        </option>
-                    </select>
-                </div>
-                <button>
-                    Twoot!
-                </button>
-            </form>
+            <CreateTwootPanel @add-twoot="addTwoot"/>
         </div>
         <div class="user-profile_twoots-wrapper">
             <TwootItem v-for="twoot in user.twoots" 
@@ -35,21 +19,16 @@
 </template>
 <script>
 import TwootItem from "./TwootItem"
-    export default {
+import CreateTwootPanel from "./CreateTwootPanel";
+export default {
     name: "UserProfile",
-    components: { TwootItem },
+    components: { CreateTwootPanel, TwootItem },
     data() {
         return {
-            newTwootContent:'',
-            selectedTwootType:'instant',
-            twootTypes:[
-                {value:'draft', name: 'Draft'},
-                {value:'instant', name: 'Instant Twoot'},
-            ],
             followers:0,
             user:{
                 id:1,
-                username: 'statusQuao',
+                username: '_statusQuao',
                 firstname: ' Russell',
                 lastname: 'Quao',
                 email: 'quao.russell3@gmail.com',
@@ -66,40 +45,14 @@ import TwootItem from "./TwootItem"
                 ]
             }
         }
-  },
-  computed: {
-    fullName() {
-      return `${this.user.firstname} ${this.user.lastname}`;
-    }
-  },
-  methods: {
-    followUser() {
-      this.followers++;
     },
-    toggleFavorite(id){
-        console.log(`Favorited Tweet with the ID of #${id}`)
-    },
-     createNewTwoot() {
-      if(this.newTwootContent && this.selectedTwootType !== 'draft'){
-          this.user.twoots.unshift({
-                id: this.user.twoots.length + 1,
-                content: this.newTwootContent
-            })
-            this.newTwootContent = ''
-      }
-    }
-  },
-  watch: {
-    followers(newFollowerCount, oldFollowerCount){
-        if(oldFollowerCount < newFollowerCount){
-            console.log('YO YOU GAINED A FOLLOWER')
+ 
+    methods: {  
+        addTwoot(twoot) {
+        this.user.twoots.unshift({id: this.user.twoots.length + 1,content: twoot})
         }
     }
-  },
-  mounted() {
-    this.followUser();
-  }
-}
+};
 </script>
 <style lang="scss" scoped>
 .user-profile{
@@ -128,11 +81,7 @@ import TwootItem from "./TwootItem"
             padding: 0 10px;
             font-weight:bold;
         }
-        .user-profile_create-twoot{
-            display: flex;
-            flex-direction: column;
-            padding-top: 20px;
-        }
+       
     }
     .user-profile_twoots-wrapper{
         display: grid;
