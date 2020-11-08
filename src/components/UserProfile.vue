@@ -6,7 +6,7 @@
             <div class="user-profile_follower-count">
                 <strong>Followers: </strong> {{followers}}
             </div>
-            <form class="user-profile_create-twoot">
+            <form class="user-profile_create-twoot" @submit.prevent="createNewTwoot">
                 <label>
                     <strong>New Twoot</strong>
                 </label>
@@ -19,6 +19,9 @@
                         </option>
                     </select>
                 </div>
+                <button>
+                    Twoot!
+                </button>
             </form>
         </div>
         <div class="user-profile_twoots-wrapper">
@@ -75,6 +78,15 @@ import TwootItem from "./TwootItem"
     },
     toggleFavorite(id){
         console.log(`Favorited Tweet with the ID of #${id}`)
+    },
+     createNewTwoot() {
+      if(this.newTwootContent && this.selectedTwootType !== 'draft'){
+          this.user.twoots.unshift({
+                id: this.user.twoots.length + 1,
+                content: this.newTwootContent
+            })
+            this.newTwootContent = ''
+      }
     }
   },
   watch: {
@@ -89,37 +101,46 @@ import TwootItem from "./TwootItem"
   }
 }
 </script>
-<style>
+<style lang="scss" scoped>
 .user-profile{
     display: grid;
     grid-template-columns: 1fr 3fr;
     width: 100%;
-    padding: 50px 5%
-}
-.user-profile_user-panel{
-    display: flex;
-    flex-direction: column;
-    margin-right: 50px;
-    padding: 20px;
-    background-color:white;
-    border-radius: 5px;
-    border: 1px solid #DFE3E8;
+    padding: 50px 5%;
+
+    .user-profile_user-panel{
+        display: flex;
+        flex-direction: column;
+        margin-right: 50px;
+        padding: 20px;
+        background-color:white;
+        border-radius: 5px;
+        border: 1px solid #DFE3E8;
+
+        h1{
+            margin: 0;
+        }
+        .user-profile_admin-badge{
+            background: rebeccapurple;
+            color: white;
+            border: radius 5px;
+            margin-right: auto;
+            padding: 0 10px;
+            font-weight:bold;
+        }
+        .user-profile_create-twoot{
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+        }
+    }
+    .user-profile_twoots-wrapper{
+        display: grid;
+        grid-gap: 10px;
+    }
 }
 
-.user-profile_create-twoot{
-    display: flex;
-    flex-direction: column;
-    padding-top: 20px;
-}
-h1{
-    margin: 0;
-}
-.user-profile_admin-badge{
-    background: rebeccapurple;
-    color: white;
-    border: radius 5px;
-    margin-right: auto;
-    padding: 0 10px;
-    font-weight:bold;
-}
+
+
+
 </style>
