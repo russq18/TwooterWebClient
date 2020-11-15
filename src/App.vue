@@ -8,15 +8,14 @@
       {{user.username}}
     </div>
   </nav>
-  <UserProfile/>
+  <router-view/>
 </div>
 </template>
 
 <script>
-import UserProfile from './components/UserProfile'
 export default {
   name: 'App',
-  components: {UserProfile},
+
   data(){
     return{
       user:{
@@ -26,24 +25,22 @@ export default {
   }
 }
 </script>
-
 <style lang="scss">
-#app{
+#app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-align: center;
   color: #2c3e50;
-  min-height: 100vh;
-  background-color:#F3F5FA;
+}
 
-  nav{
+ nav{
     display:flex;
     align-items: center;
     justify-content: space-between;
     padding:10px 5%;
     background-color: rgb(59, 196, 150);
     color: white;
-
     .navigation_logo{
       font-weight: bold;
       font-size: 24px;
@@ -52,8 +49,6 @@ export default {
       font-weight: bold;
     }
   }
-}
-
 .follow-button{
   width: 6rem;
   align-self: center;
@@ -62,5 +57,4 @@ export default {
   background: darkblue;
   color:darkgray;
 }
-
 </style>
