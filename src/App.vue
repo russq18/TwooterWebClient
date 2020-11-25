@@ -1,10 +1,12 @@
 <template>
 <div id="app">
   <nav>
-    <div class="navigation_logo">
-      Twotter
-    </div>
-    <div class="navigation_user">
+    <router-link to="/">
+      <div class="navigation_logo">
+        Twotter
+      </div>
+    </router-link>
+    <div class="navigation_user" v-if="user">
       {{user.username}}
     </div>
   </nav>
@@ -13,14 +15,17 @@
 </template>
 
 <script>
+import{ useStore } from 'vuex';
+import{ computed } from 'vue';
+
 export default {
   name: 'App',
+  setup(){
+    const store = useStore();
+    const user = computed(() => store.state.User.user);
 
-  data(){
     return{
-      user:{
-        username: '_statusQua0'
-      }
+      user
     }
   }
 }

@@ -1,5 +1,4 @@
-export const users ={
-    "users":[
+export const users =[
         {
             "id":1,
             "username": "_statusQuao",
@@ -49,4 +48,3 @@ export const users ={
             ]
         }
     ]
-}

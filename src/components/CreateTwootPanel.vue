@@ -18,9 +18,6 @@
             Twoot!
             </button>
         </div>
-        
-
-        
     </form>
 </template>
 <script>

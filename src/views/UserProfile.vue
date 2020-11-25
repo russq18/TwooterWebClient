@@ -21,6 +21,7 @@
 <script>
 import{ reactive, computed} from 'vue';
 import { useRoute } from 'vue-router';
+import { users } from "../assets/users"
 import TwootItem from "../components/TwootItem"
 import CreateTwootPanel from "../components/CreateTwootPanel";
 
@@ -35,24 +36,7 @@ export default {
 
         const state = reactive({
         followers:0,
-            user:{
-                id:1,
-                username: '_statusQuao',
-                firstname: ' Russell',
-                lastname: 'Quao',
-                email: 'quao.russell3@gmail.com',
-                isAdmin: true,
-                twoots:[
-                    {  id: 1, content:'Twotter is amazing'},
-                    {  id: 2, content:"Don't forget to subscribe to Russell's Channel"},
-                    {  id: 3, content:'YEEETTTTTTTTTTTT'},
-                    {  id: 4, content:"bEARS bEATS bATTLESTAR GALACTICA"},
-                    {  id: 5, content:'yIKESSSSSSSS'},
-                    {  id: 6, content:"yERRRRRRRRRRRRRRrRrRrRr"},
-                    {  id: 7, content:'Twotter is amazing'},
-                    {  id: 8, content:"Don't forget to subscribe to Russell's Channel"}
-                ]
-            }
+            user: users[userId.value-1] || users[0]
         })
 
         function addTwoot(twoot) {
